@@ -14,8 +14,8 @@
 <% if user_signed_in? %>
 <!-- パスは出たらめ書き換える -->
       <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      <%= link_to "Home", user_path(current_user.id) %>
-      <%= link_to "Books", new_book_path %>
+      <%= link_to "Home", book_path(current_user.id) %>
+      <%= link_to "Books", books_path %>
       <%= link_to "Users", new_user_session_path %>
       <% else %>
       <%= link_to "Home", books_path %>
@@ -26,4 +26,3 @@
 </header>
 <%= yield %>
 </body>
-</html>

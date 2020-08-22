@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!, except: [:index]
+
   def new
     @book = book.new
   end
@@ -9,14 +10,17 @@ before_action :authenticate_user!, except: [:index]
     @book.user_id = current_user.id
     @book.save
     redirect_to book_path
+    flash[:notice] = 'Book was successfully created.'
   end
 
+#updateに書く
+#flash[:update] = 'Book was successfully updated.'
+
   def index
-    @books = Book.all
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.all
   end
 
   private

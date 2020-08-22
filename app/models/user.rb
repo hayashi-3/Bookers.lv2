@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
    has_many :Books
+   attachment :profile_image
+   # プロフィールイメージのコントローラー書いてない
 
-   validates :user, presence: true
+   validates :name, presence: true, length: { in: 2..20 }
 
 end
