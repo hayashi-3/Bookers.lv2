@@ -10,21 +10,35 @@
   </head>
 
 <body>
-<header>
-<!-- BookersとHomeとか並べる -->
-<h3>Bookers</h3>
 <% if user_signed_in? %>
-      <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      <%= link_to "Home", user_path(current_user) %>
-      <%= link_to "Books", books_path %>
-      <%= link_to "Users", books_path %>
-      <% else %>
-      <%= link_to "Home", root_path %>
-      <%= link_to "About", about_path %>
-      <%= link_to "sign up", new_user_registration_path %>
-      <%= link_to "login", new_user_session_path %>
+<div class="row" style="background-color: black;">
+<nav class="nav navbar-right>
+    <a class="nav-link book">Bookers</a>
+    <a class="nav-link active" href="destroy_user_session_path", method: :delete>logout</a>
+    <a class="nav-link" href="user_path(current_user)">Home</a>
+    <a class="nav-link" href="books_path">Books</a>
+    <a class="nav-link disabled" href="books_path" >Users</a>
+</nav>
+<% else %>
+<nav class="navbar navbar-right">
+<ul>Bookers</ul>
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+    <a class="nav-link active" href="root_path">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="about_path">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="new_user_registration_path">sign up</a>s
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="new_user_session_path" >login</a>
+  </li>
+</ul>
   <% end %>
+</nav>
+</div>
 <%= yield %>
-</header>
 </body>
 </html>
