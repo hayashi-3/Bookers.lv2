@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   	get 'about' => 'about#about'
   	resources :users
   	resources :books, only: [:new, :create, :index, :show]
-
 end

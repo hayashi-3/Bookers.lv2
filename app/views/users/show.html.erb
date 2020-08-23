@@ -1,6 +1,78 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%=flash[:notice] %>
+
+<!-- プロフィール写真の反映 -->
 <div class="profile-container">
-  <h3 class="profile-name"><%= @user.name %></h3>
-  <%= image_tag('sample-author1.jpg', class: "img-circle pull-left profile-thumb", style: "width: 100px; height: 100px; margin-top: 20px;") %>
+    <h3 class="profile-name"><%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+  <% if @user.id == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
+  <% end %>
 </div>
+
+<!-- 投稿内容 -->
+<h3>Book detail</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Opinion</th>
+        </tr>
+</table>
+<!-- <table>
+	<tr>
+	 <th width="800">Title</th><th width="900">Opinion</th><th></th>
+	</tr> -->
+<!-- 繰り返し表示 -->
+<% @book.each do |book| %>
+<tr>
+<td><%= book.title %></td>
+<td><%= book.body %></td>
+<!-- 各種リンク -->
+<td><%= link_to "Show","/books/#{book.id}"%></td>
+</tr>
+<% end %>
+</table>
+
+<!-- 投稿機能-->
+<h3>New book</h3>
+<form>
+  <div class="col-lg-3">
+    <label for="exampleFormControlInput1">Title</label>
+    <input type="title" class="form-control" id="exampleFormControlInput1">
+    <label for="exampleFormControlTextarea1">Opinion</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <button type="submit" class="btn btn-primary">Create Book</button>
+  </div>
+</form>
+<!-- <section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+          <% @post_images.each do |post_image| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-image">
+                  <div class="view view-first">
+                    <%= link_to post_image_path(post_image.id) do %>
+                      <%= attachment_image_tag post_image, :image %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="block-content">
+                  <%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+                  <h3 class="block-title">
+                    <%= link_to post_image_path(post_image.id) do %>
+                      <i class="fa fa-map-marker"></i><%= post_image.shop_name %>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ -->

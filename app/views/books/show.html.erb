@@ -1,10 +1,27 @@
 <%=flash[:notice] %>
 <!-- 投稿内容 -->
-<h3>Books</h3>
-<table>
+<h3>User info</h3>
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        </div>
+        <div class="col-lg-8">
+            <h3>Book detail</h3>
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Opinion</th>
+        </tr>
+        </thead>
+        </table>
+      </div>
+    </div>
+    </div>
+<!-- <table>
 	<tr>
 	 <th width="800">Title</th><th width="900">Opinion</th><th></th>
-	</tr>
+	</tr> -->
 <!-- 繰り返し表示 -->
 <% @book.each do |book| %>
 <tr>

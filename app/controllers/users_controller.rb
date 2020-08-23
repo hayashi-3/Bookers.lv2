@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-  	@profile_images = @user.post_images.page(params[:page]).reverse_order
+  	@profile_image = User.find(params[:id])
   end
 
   def edit
