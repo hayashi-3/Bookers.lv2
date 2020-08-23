@@ -11,34 +11,32 @@
 
 <body>
 <% if user_signed_in? %>
-<div class="row" style="background-color: black;">
-<nav class="nav navbar-right>
-    <a class="nav-link book">Bookers</a>
-    <a class="nav-link active" href="destroy_user_session_path", method: :delete>logout</a>
-    <a class="nav-link" href="user_path(current_user)">Home</a>
-    <a class="nav-link" href="books_path">Books</a>
-    <a class="nav-link disabled" href="books_path" >Users</a>
-</nav>
+<div class="container-fluid" style="background-color: black;">
+    <a class="nav-book">Bookers</a>
+    <a class="nav-link" href="user_path(current_user)"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a>
+    <a class="nav-link disabled" href="books_path" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Users</a>
+    <a class="nav-link" href="books_path"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Books</a>
+    <a class="nav-link active" href="destroy_user_session_path", method: :delete><span class="glyphicon glyphicon-share" aria-hidden="true"></span>logout</a>
+</div>
 <% else %>
 <nav class="navbar navbar-right">
 <ul>Bookers</ul>
 <ul class="nav justify-content-end">
     <li class="nav-item">
-    <a class="nav-link active" href="root_path">Home</a>
+    <a class="nav-link active" href="root_path"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="about_path">About</a>
+    <a class="nav-link" href="about_path"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>About</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="new_user_registration_path">sign up</a>s
+    <a class="nav-link" href="new_user_registration_path"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>sign up</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link disabled" href="new_user_session_path" >login</a>
+    <a class="nav-link disabled" href="new_user_session_path" ><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>login</a>
   </li>
 </ul>
   <% end %>
 </nav>
-</div>
 <%= yield %>
 </body>
 </html>
