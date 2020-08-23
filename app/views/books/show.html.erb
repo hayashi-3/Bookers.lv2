@@ -2,7 +2,7 @@
 
 <table>
 	<tr>
-	 <th>Title</th><th>Body</th><th></th>
+	 <th>Title</th><th>Opinion</th><th></th>
 	</tr>
 <!-- 繰り返し表示 -->
 <% @book.each do |book| %>
@@ -18,4 +18,12 @@
 </table>
 
 <!-- 投稿機能のテンプレートを作成？ -->
-<!-- %= render 'form' % -->
+<h3>New book</h3>
+<form>
+  <div class="col-lg-3">
+    <label for="exampleFormControlInput1">Title</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1">
+    <label for="exampleFormControlTextarea1">Opinion</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+</form>
