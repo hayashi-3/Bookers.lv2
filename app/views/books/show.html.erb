@@ -1,4 +1,5 @@
 <%=flash[:notice] %>
+<!-- 投稿内容 -->
 <h3>Books</h3>
 <table>
 	<tr>
@@ -11,19 +12,18 @@
 <td><%= book.body %></td>
 <!-- 各種リンク -->
 <td><%= link_to "Show","/books/#{book.id}"%></td>
-<td><%= link_to "Edit","/books/#{book.id}/edit"%></td>
-<td><%= link_to "Destroy",destroy_book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %></td>
 </tr>
 <% end %>
 </table>
 
-<!-- 投稿機能のテンプレートを作成？ -->
+<!-- 投稿機能-->
 <h3>New book</h3>
 <form>
   <div class="col-lg-3">
     <label for="exampleFormControlInput1">Title</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1">
+    <input type="title" class="form-control" id="exampleFormControlInput1">
     <label for="exampleFormControlTextarea1">Opinion</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <button type="submit" class="btn btn-primary">Create Book</button>
   </div>
 </form>
