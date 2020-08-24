@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   	get 'top' => 'top#index'
   	get 'about' => 'about#about'
   	resources :users
-  	resources :books, only: [:new, :create, :index, :show]
+  	resources :books, only: [:new, :create, :index, :show, :edit]
 end

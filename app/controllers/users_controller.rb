@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
   def show
-  	@user = User.find(params[:id])
-  	@profile_image = User.find(params[:id])
+    @user = User.find(params[:id])
+    @books = Book.all
+    @profile_image = User.find(params[:id])
+    @book = Book.new
   end
 
   def edit
@@ -13,6 +15,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)
+    flash[:update] = 'plofile was successfully updated.'
   end
 
   private

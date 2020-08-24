@@ -1,0 +1,37 @@
+<!-- プロフィールカード -->
+<h3>User info</h3>
+<div class="card" style="width: 30rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">name</li>
+    <%= @user.name %>
+    <li class="list-group-item">introduction</li>
+  </ul>
+    <%= @user.profile_image%>
+  <div class="card-body">
+   <%= link_to edit_user_registration_path do %>
+   <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+   <% end %>
+  </div>
+</div>
+<%= form_for(book) do |f| %>
+  <%# ここからエラーメッセージ %>
+  <% if book.errors.any? %>
+    <div>
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%# ここまでエラーメッセージ %>
+<h1>New book</h1>
+<p>Title</p>
+<%= f.text_field:title %>
+<p>Body</p>
+<%= f.text_area:body %>
+<%= f.submit 'Create Book' %>
+<% end %>
