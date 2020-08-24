@@ -36,6 +36,13 @@ def index
     flash[:update] = 'Book was successfully updated.'
   end
 
+  def destroy
+  @book = Book.find(params[:id])
+  @book.destroy
+  @user = current_user
+  redirect_to books_path
+  end
+
   private
   def book_params
     params.require(:book).permit(:title, :body)

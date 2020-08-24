@@ -2,17 +2,16 @@
 <h3>User info</h3>
 <div class="card" style="width: 30rem;">
   <img src="..." class="card-img-top" alt="...">
+  <div class="card-body"><%= @user.profile_image%>
+  </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">name</li>
-    <%= @user.name %>
-    <li class="list-group-item">introduction</li>
+    <li class="list-group-item">name
+    <%= @user.name %></li>
+    <li class="list-group-item">introduction<%= @user.introduction %></li>
   </ul>
-    <%= @user.profile_image%>
-  <div class="card-body">
    <%= link_to edit_user_registration_path do %>
    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
    <% end %>
-  </div>
 </div>
 <%= form_for(book) do |f| %>
   <%# ここからエラーメッセージ %>
@@ -32,6 +31,6 @@
 <p>Title</p>
 <%= f.text_field:title %>
 <p>Body</p>
-<%= f.text_area:body %>
+<%= f.text_area:body %><br>
 <%= f.submit 'Create Book' %>
 <% end %>
