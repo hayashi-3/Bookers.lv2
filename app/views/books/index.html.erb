@@ -20,7 +20,6 @@
         <% @books.each do |book| %>
         <tr>
             <th><%= attachment_image_tag book.user, :profile_image, fallback: "no_image.jpeg", size: '200x200'%></th>
-            <th>< <%= @user.name %></th>
             <th><%= book.title %></th>
             <th><%= book.body %></th>
             <th><%= link_to "Show","/books/#{book.id}"%></th>

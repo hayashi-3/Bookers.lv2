@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+before_action :correct_user, only: [:edit, :update]
+
+def correct_user
+    user = User.find(params[:id])
+      if current_user != user
+        redirect_to user_path(current_user)
+      end
+    end
 
   def user
   #インスタンスメソッドないで、selfはインスタンス自身を表す
@@ -41,7 +49,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user == current_user
   if@user.update(user_params)
-    flash[:update] = 'It was successfully updated.'
+    flash[:notice] = 'It was successfully updated.'
     redirect_to user_path(@user)
    else
     render :edit

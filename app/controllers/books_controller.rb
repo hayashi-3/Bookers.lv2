@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!
+before_action :correct_user, only: [:edit, :update]
 
     def correct_user
-  　@book = current_user.book.find_by(id: params[:id])
-    unless @book
-      redirect_to root_url
-    end
+    book = Book.find(params[:id])
+      if current_user != book.user
+        redirect_to books_path
+      end
     end
 
   def user
@@ -32,7 +33,7 @@ before_action :authenticate_user!
     @book = Book.new(book_params)
     @book.user_id=current_user.id
     if  @book.save
-    flash[:notice] = 'Book was successfully created.'
+    flash.now[:notice] = 'Book was successfully created.'
     redirect_to book_path(@book)
     else
     @books = Book.all
@@ -44,6 +45,7 @@ before_action :authenticate_user!
   def show
     @book_show = Book.find(params[:id])
     @book = Book.new
+    flash.now[:notice] = 'Book was successfully created.'
   end
 
   def edit
@@ -53,8 +55,8 @@ before_action :authenticate_user!
   def update
     @book = Book.find(params[:id])
     @book.update(book_params)
-    redirect_to book_path(book)
-    flash[:update] = 'Book was successfully updated.'
+    redirect_to book_path(@book)
+    flash[:notice] = 'Book was successfully updated.'
   end
 
   def plofile_image_id
@@ -71,6 +73,7 @@ before_action :authenticate_user!
   @book = Book.find(params[:id])
   @book.destroy
   @user = current_user
+  flash[:notice] = 'Book was successfully destroy.'
   redirect_to books_path
   end
 
