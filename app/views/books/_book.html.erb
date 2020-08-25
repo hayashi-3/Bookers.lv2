@@ -1,4 +1,7 @@
 <!-- プロフィールカード -->
+<div class="container">
+    <div class="row">
+      <div class="col-xs-4">
 <h3>User info</h3>
 <div class="card" style="width: 30rem;">
   <div class="card-body"><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '200x200' %>
@@ -28,6 +31,7 @@
     </div>
   <% end %>
   <%# ここまでエラーメッセージ %>
+
 <h1>New book</h1>
 <p>Title</p>
 <%= f.text_field:title %>
@@ -35,3 +39,6 @@
 <%= f.text_area:body %><br>
 <%= f.submit 'Create Book' %>
 <% end %>
+</div>
+</div>
+</div>
