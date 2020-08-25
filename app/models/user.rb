@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
    has_many :Books
    attachment :profile_image
-   # プロフィールイメージのコントローラー書いてない
 
    validates :name, presence: true, length: { in: 2..20 }
+   validates :introduction, presence: true, length: { maximum: 50 }
 
 end

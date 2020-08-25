@@ -2,17 +2,19 @@
 <h3>User info</h3>
 <div class="card" style="width: 30rem;">
   <img src="..." class="card-img-top" alt="...">
-  <div class="card-body"><%= @user.profile_image%>
+  <div class="card-body"><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '200x200' %>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">name
     <%= @user.name %></li>
     <li class="list-group-item">introduction<%= @user.introduction %></li>
   </ul>
-   <%= link_to edit_user_registration_path do %>
-   <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-   <% end %>
+  <% if @user.id == current_user.id %>
+    <%= link_to "edit", edit_user_registration_path, class: "glyphicon glyphicon-wrench" %>
+  <% end %>
 </div>
+
+<!-- 投稿機能 -->
 <%= form_for(book) do |f| %>
   <%# ここからエラーメッセージ %>
   <% if book.errors.any? %>

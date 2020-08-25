@@ -12,22 +12,21 @@
             <th>Title</th>
             <th>Opinion</th>
         </tr>
+
+        <!-- 繰り返し表示 -->
+        <% @books.each do |book| %>
+        <tr>
+            <td>< <%= @user.name %></td>
+            <td><%= book.title %></td>
+            <td><%= book.body %></td>
+            <td><%= link_to "Show","/books/#{book.id}"%></td>
+        </tr>
         </thead>
         </table>
       </div>
     </div>
     </div>
-
-<!-- 繰り返し表示 -->
-<% @books.each do |book| %>
-<tr>
-<td><%= book.title %></td>
-<td><%= book.body %></td>
-<!-- 各種リンク -->
-<td><%= link_to "Show","/books/#{book.id}"%></td>
-</tr>
 <% end %>
-</table>
 
 <!-- 投稿機能-->
 <%= render 'books/book',book: @book,user: @user %>
