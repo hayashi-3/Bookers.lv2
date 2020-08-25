@@ -6,7 +6,7 @@
       <%= render 'books/book',book: @book,user: @user %>
         </div>
         <div class="col-xs-8">
-            <h3>Book detail</h3>
+            <h3>Users</h3>
         <table class="table">
         <thead>
         <tr>
@@ -19,7 +19,7 @@
         <tbody>
         <% @users.each do |user| %>
         <tr>
-            <th><%= attachment_image_tag user, :profile_image %></th>
+            <th><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '200x200'%></th>
             <th><%= user.name %></th>
         <!-- リンク -->
             <th><%= link_to "Show",user_path(user.id)%></th>

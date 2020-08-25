@@ -1,16 +1,15 @@
 <!-- プロフィールカード -->
 <h3>User info</h3>
 <div class="card" style="width: 30rem;">
-  <img src="..." class="card-img-top" alt="...">
   <div class="card-body"><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '200x200' %>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">name
-    <%= @user.name %></li>
-    <li class="list-group-item">introduction<%= @user.introduction %></li>
+    <%= user.name %></li>
+    <li class="list-group-item">introduction<%= user.introduction %></li>
   </ul>
-  <% if @user.id == current_user.id %>
-    <%= link_to "edit", edit_user_registration_path, class: "glyphicon glyphicon-wrench" %>
+  <% if user.id == current_user.id %>
+    <%= link_to "edit", edit_user_path(current_user), class: "glyphicon glyphicon-wrench" %>
   <% end %>
 </div>
 
@@ -19,10 +18,10 @@
   <%# ここからエラーメッセージ %>
   <% if book.errors.any? %>
     <div>
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <h2><%= pluralize(book.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
-        <% @book.errors.full_messages.each do |message| %>
+        <% book.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

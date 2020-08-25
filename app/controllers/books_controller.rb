@@ -1,6 +1,13 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!
 
+    def correct_user
+  　@book = current_user.book.find_by(id: params[:id])
+    unless @book
+      redirect_to root_url
+    end
+    end
+
   def user
   #インスタンスメソッドないで、selfはインスタンス自身を表す
     return User.find_by(id: self.user_id)
@@ -24,21 +31,19 @@ before_action :authenticate_user!
   def create
     @book = Book.new(book_params)
     @book.user_id=current_user.id
-    @book.save
-    redirect_to book_path(@book)
+    if  @book.save
     flash[:notice] = 'Book was successfully created.'
-    @plofile_image = PlofileImage.new(plofile_image_params)
-    @plofile_image.user_id = current_user.id
-    @plofile_image.save
-    redirect_to book_path
+    redirect_to book_path(@book)
+    else
+    @books = Book.all
+    @user = current_user
+    render :index
+    end
   end
 
   def show
-    @books = Book.all
+    @book_show = Book.find(params[:id])
     @book = Book.new
-    @user = current_user
-    # @book = Book.find_by(id: params[:id])
-    # @user = User.find_by(id: @book.user_id)
   end
 
   def edit
