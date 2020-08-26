@@ -12,11 +12,13 @@
 <body>
 <% if user_signed_in? %>
 <div class="container-fluid" style="background-color: black;">Bookers</div>
-<div class="container-fluid" style="background-color: black;">
+<div class="col-lg-12" style="background-color: black;">
+<div class="pull-right" style="background-color: black;">
     <%= link_to "Home", user_path(current_user), class:'glyphicon glyphicon-home' %>
     <%= link_to "Users", users_path, class:'glyphicon glyphicon-user' %>
     <%= link_to "Books", books_path, class:'glyphicon glyphicon-book' %>
     <%= link_to "logout", destroy_user_session_path, class:'glyphicon glyphicon-log-out', method: :delete %>
+</div>
 </div>
 <% else %>
 <div class="container-fluid" style="background-color: black;">Bookers</div>

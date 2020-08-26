@@ -9,7 +9,8 @@
     <li class="list-group-item">introduction<%= user.introduction %></li>
   </ul>
   <% if user.id == current_user.id %>
-    <%= link_to "edit", edit_user_path(current_user), class: "glyphicon glyphicon-wrench" %>
+  <dev class="row">
+    <button type="button" class="btn btn-outline-secondary"><%= link_to "", edit_user_path(current_user), class: "glyphicon glyphicon-wrench" %></button>
   <% end %>
 </div>
 
@@ -34,5 +35,5 @@
 <%= f.text_field:title %>
 <p>Body</p>
 <%= f.text_area:body %><br>
-<%= f.submit 'Create Book' %>
+<%= f.submit 'Create Book',class: "btn btn-primary btn-sm" %>
 <% end %>
