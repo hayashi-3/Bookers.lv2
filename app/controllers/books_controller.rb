@@ -53,7 +53,7 @@ before_action :correct_user, only: [:edit, :update, :destroy]
 
   def update
     @book = Book.find(params[:id])
-    if@user.update(user_params)
+    if@book.update(book_params)
     flash[:notice] = 'It was successfully updated.'
     redirect_to book_path(@book.id)
    else
