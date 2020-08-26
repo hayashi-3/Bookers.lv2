@@ -10,8 +10,8 @@
         <table class="table">
         <thead>
         <tr>
-            <th>Title</th>
-            <th>Opinion</th>
+            <th>image</th>
+            <th>name</th>
             <th colspan="3"></th>
         </tr>
         </thead>
@@ -19,7 +19,7 @@
         <tbody>
         <% @users.each do |user| %>
         <tr>
-            <th><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '200x200'%></th>
+            <th><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '100x100'%></th>
             <th><%= user.name %></th>
         <!-- リンク -->
             <th><%= link_to "Show",user_path(user.id)%></th>

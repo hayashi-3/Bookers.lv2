@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<%=flash[:notice] %>
   <head>
     <title>Bookers</title>
   </head>
@@ -9,8 +10,8 @@
 	you can shere and exchange your opinions,inoressions,and emotions<br>
     about various books!
 </h4>
-<button type="button" class="btn btn-primary btn-lg btn-block", style="background-color: darkred" ><%= link_to "login", new_user_session_path %></button>
+<button type="button" class="btn btn-primary btn-lg btn-block", style="background-color: darkred" ><%= link_to "Log in", new_user_session_path %></button>
 
-<button type="button" class="btn btn-secondary btn-lg btn-block"><%= link_to "Signup", new_user_registration_path %></button>
+<button type="button" class="btn btn-secondary btn-lg btn-block"><%= link_to "Sign up", new_user_registration_path %></button>
 </body>
 </html>

@@ -8,14 +8,14 @@ def correct_user
       end
     end
 
-  def user
-  #インスタンスメソッドないで、selfはインスタンス自身を表す
-    return User.find_by(id: self.user_id)
-  end
+  # def user
+  # #インスタンスメソッドないで、selfはインスタンス自身を表す
+  #   return User.find_by(id: self.user_id)
+  # end
 
-  def books
-    return Book.where(user_id: self.id)
-  end
+  # def books
+  #   return Book.where(user_id: self.id)
+  # end
 
   def index
     @book = Book.new
@@ -60,8 +60,8 @@ def correct_user
     @book = Book.find(params[:id])
     @book.destroy
     @user = current_user
-    flash[:notice]="Book was successfully deleted."
-    redirect_to books_path
+    flash[:notice] = "Signed out successfully."
+    redirect_to root_path
   end
 
   private

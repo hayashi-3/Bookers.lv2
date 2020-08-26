@@ -17,11 +17,12 @@
         </thead>
         <tbody>
         <tr>
-            <th><%= attachment_image_tag @book_show.user, :profile_image , fallback: "no_image.jpeg", size: '200x200'%></th>
+            <th><%= link_to user_path(@book_show.user.id) do %><%= attachment_image_tag @book_show.user, :profile_image , fallback: "no_image.jpeg", size: '100x100'%></th>
+            <% end %>
+            <th><%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %></th>
+            <% end %>
             <th><%= @book_show.title %></th>
             <th><%= @book_show.body %></th>
-            <!-- userのshowに飛ぶ -->
-            <th><%= link_to "User",user_path(@book_show.user.id)%></th>
             <% if @book_show.user.id == current_user.id %>
             <th><%= link_to "edit", edit_book_path(@book_show), class: "btn btn-success" %></th>
             <th><%= link_to "destroy",book_path(@book_show), method: :delete, class: "btn btn-danger" %></th>

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 before_action :authenticate_user!
-before_action :correct_user, only: [:edit, :update]
+before_action :correct_user, only: [:edit, :update, :destroy]
 
     def correct_user
     book = Book.find(params[:id])
@@ -9,14 +9,14 @@ before_action :correct_user, only: [:edit, :update]
       end
     end
 
-  def user
-  #インスタンスメソッドないで、selfはインスタンス自身を表す
-    return User.find_by(id: self.user_id)
-  end
+  # def user
+  # #インスタンスメソッドないで、selfはインスタンス自身を表す
+  #   return User.find_by(id: self.user_id)
+  # end
 
-  def books
-    return Book.where(user_id: self.id)
-  end
+  # def books
+  #   return Book.where(user_id: self.id)
+  # end
 
   def index
     @books = Book.all
@@ -45,7 +45,6 @@ before_action :correct_user, only: [:edit, :update]
   def show
     @book_show = Book.find(params[:id])
     @book = Book.new
-    flash.now[:notice] = 'Book was successfully created.'
   end
 
   def edit
@@ -54,9 +53,12 @@ before_action :correct_user, only: [:edit, :update]
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to book_path(@book)
-    flash[:notice] = 'Book was successfully updated.'
+    if@user.update(user_params)
+    flash[:notice] = 'It was successfully updated.'
+    redirect_to book_path(@book.id)
+   else
+    render :edit
+  end
   end
 
   def plofile_image_id
