@@ -8,11 +8,9 @@
     <%= user.name %></li>
     <li class="list-group-item">introduction<%= user.introduction %></li>
   </ul>
-  <% if user.id == current_user.id %>
   <dev class="row">
-    <button type="button" class="btn btn-outline-secondary col-xs-12"><%= link_to "", edit_user_path(current_user), class: "glyphicon glyphicon-wrench" %></button>
-  <% end %>
-</div>
+    <%= link_to "", edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  </div>
 
 <!-- 投稿機能 -->
 <%= form_for(book) do |f| %>
