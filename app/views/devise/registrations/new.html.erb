@@ -1,3 +1,4 @@
+<div class=log-top>
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -27,8 +28,9 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up"  %>
+    <%= f.submit "Sign up",class:"btn btn-success col-xs-pffset-1 sign_up" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

@@ -9,15 +9,6 @@ before_action :correct_user, only: [:edit, :update, :destroy]
       end
     end
 
-  # def user
-  # #インスタンスメソッドないで、selfはインスタンス自身を表す
-  #   return User.find_by(id: self.user_id)
-  # end
-
-  # def books
-  #   return Book.where(user_id: self.id)
-  # end
-
   def index
     @books = Book.all
     @book = Book.new

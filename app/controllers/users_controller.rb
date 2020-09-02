@@ -7,16 +7,7 @@ def correct_user
       if current_user != user
         redirect_to user_path(current_user)
       end
-    end
-
-  # def user
-  # #インスタンスメソッドないで、selfはインスタンス自身を表す
-  #   return User.find_by(id: self.user_id)
-  # end
-
-  # def books
-  #   return Book.where(user_id: self.id)
-  # end
+end
 
   def index
     @book = Book.new

@@ -16,7 +16,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.container-fluid {
+.top {
 	color: white;
-	text-size: 50px;
+	font-size: 20px;
+}
+
+header {
+	margin-bottom:30px;
+}
+
+.log-top {
+	margin-top:70px;
+	margin-left:70px;
 }
