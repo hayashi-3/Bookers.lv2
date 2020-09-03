@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   	root 'top#index'
   	get 'top' => 'top#index'
   	get 'index' => 'home#index'
-  	resource :home do
+  resource :home do
 	resources :about
 	end
-  	resources :users
-  	resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :users
+  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resource :book_comments,only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+  end
 end
