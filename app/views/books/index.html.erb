@@ -31,7 +31,11 @@
             <th>
             <%= link_to book.title, book_path(book.id) %></th>
             <th><%= book.body %></th>
-        <% end %>
+
+            <!-- コメント数 -->
+            <th>
+            <%= link_to "#{book.book_comments.count} コメント数：" %>
+            </th>
             <!-- いいね機能 -->
             <% if @book.favorited_by?(current_user) %>
                 <tr>
@@ -58,6 +62,7 @@
                 </div>
             </th>
         </tr>
+        <% end %>
         <% end %>
         </tbody>
         </table>
