@@ -28,48 +28,62 @@
                 <%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %>
                 <% end %>
             </td>
-                  <th><%= @book_show.title %></th>
-                  <th><%= @book_show.body %></th>
+                  <td><%= @book_show.title %></td>
+                  <td><%= @book_show.body %></td>
                 <% if @book_show.user.id == current_user.id %>
-                  <th><%= link_to "Edit", edit_book_path(@book_show), class: "btn btn-success" %></th>
-                  <th><%= link_to "Destroy",book_path(@book_show), method: :delete, class: "btn btn-danger" %></th>
+                  <td><%= link_to "Edit", edit_book_path(@book_show), class: "btn btn-success" %></td>
+                  <td><%= link_to "Destroy",book_path(@book_show), method: :delete, class: "btn btn-danger" %></td>
                 <% end %>
+                <!-- いいね機能 -->
+                <% if @book_show.favorited_by?(current_user) %>
+                  <td>
+                    <%= link_to book_favorites_path(@book_show), method: :delete do %>
+                    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                    <%= @book_show.favorites.count %>
+                    <% end %>
+                  </td>
+                <% else %>
+                  <td>
+                    <%= link_to book_favorites_path(@book_show), method: :book do %>
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <%= @book_show.favorites.count %>
+                    <% end %>
+                  </td>
+                <% end %>
+                <!-- コメント数 -->
+                  <td><%= link_to "#{@book.book_comments.count} コメント", book_path(@book_show) %></td>
         </tr>
 <!-- bookcommentここから -->
-<ol>
-  <% @book_show.book_comments.each do |book_comment| %></th>
-    <li class="comment"></li>
-      <div class="comment-body bb">
-          <div class="comment-avatar">
-          <div class="avatar">
-            <%= link_to user_path(@book_show.user.id) do %><%= attachment_image_tag @book_comment.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
-                <% end %><br>
-          </div>
-        </div>
-        <div class="comment-text">
-          <div class="comment-author clearfix">
-            <%= link_to user_path(@book_show.user.id) do %><%= book_comment.user.name %>
+        <tr>
+        <td><% @book_show.book_comments.each do |book_comment| %>
+            <%= attachment_image_tag @book_comment.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
+            <br>
+                <%= book_comment.user.name %>
+                <%= book_comment.comment %>
+            <% if book_comment.user == current_user %>
+              <%= link_to "destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger pull-right" %>
             <% end %>
-          </div>
-          <div class="comment-entry"><%= book_comment.comment %></div>
-          <% if @book_show == current_user %>
-            <div>
-              <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger pull-right" %>
-          <% end %>
-            </div>
-        </div>
-      　</div>
-    </li>
-  <% end %>
-</ol>
+       <% end %></td>
+     </tr>
 <!-- bookcommentここまで -->
 <!-- コメント投稿フォーム -->
-  <tr><%= form_for [@book_show, @book_comment] do |f| %>
-      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-    </div>
-  </div>
-  <%= f.submit "送信" %>
-  <% end %>
+      <% if @book_comment.errors.any? %>
+        <div>
+            <h2><%= pluralize(book_comment.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+          <ul>
+            <% book_comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  <tr>
+    <td><%= form_for [@book_show, @book_comment] do |f| %>
+      <%= f.text_area :comment, class: "col-xs-12",placeholder: "コメントをここに" %>
+    </td>
+    <td><%= f.submit "送信" %></td>
+    <% end %>
   </tr>
 <!-- コメント投稿フォーム　ここまで -->
     </tbody>

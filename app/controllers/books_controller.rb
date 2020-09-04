@@ -15,6 +15,8 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     @user = current_user
     @book_comments = BookComment.all
     @book_comment = BookComment.new
+    @favorites = Favorite.all
+    @favorite = Favorite.new
   end
 
   def new
