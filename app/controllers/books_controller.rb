@@ -13,6 +13,10 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     @books = Book.all
     @book = Book.new
     @user = current_user
+    @book_comments = BookComment.all
+    @book_comment = BookComment.new
+    @favorites = Favorite.all
+    @favorite = Favorite.new
   end
 
   def new
@@ -36,6 +40,9 @@ before_action :correct_user, only: [:edit, :update, :destroy]
   def show
     @book_show = Book.find(params[:id])
     @book = Book.new
+    @book_comment = BookComment.new
+    @book_comments = BookComment.all
+    @favorite = Favorite.new
   end
 
   def edit
@@ -71,7 +78,9 @@ before_action :correct_user, only: [:edit, :update, :destroy]
   end
 
   private
+
   def book_params
     params.require(:book).permit(:title, :body)
   end
+
 end

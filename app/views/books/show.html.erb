@@ -1,36 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://kit.fontawesome.com/0c5d92a319.js" crossorigin="anonymous"></script>
+</head>
 <%= flash[:notice] %>
     <div class="container">
     <div class="row">
       <div class="col-xs-3">
       <%= render 'books/book',book: @book,user: @book_show.user %>
         </div>
+        <div class="top"></div>
         <div class="col-xs-9">
-            <h3>Book detail</h3>
+            <h2>Book detail</h2>
         <table class="table">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
-            <th colspan="3"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><%= link_to user_path(@book_show.user.id) do %><%= attachment_image_tag @book_show.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
-            <% end %><br>
-                <%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Opinion</th>
+                <th colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><%= link_to user_path(@book_show.user.id) do %><%= attachment_image_tag @book_show.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
+                    <% end %><br>
+                    <%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %>
+                </td>
+                <% end %>
+                      <td><%= @book_show.title %></td>
+                      <td><%= @book_show.body %></td>
+                    <% if @book_show.user.id == current_user.id %>
+                      <td><%= link_to "Edit", edit_book_path(@book_show), class: "btn btn-success" %></td>
+                      <td><%= link_to "Destroy",book_path(@book_show), method: :delete, class: "btn btn-danger" %></td>
+                    <% end %>
+                    <!-- いいね機能 -->
+                    <% if @book_show.favorited_by?(current_user) %>
+                      <td>
+                        <%= link_to book_favorites_path(@book_show), method: :delete do %>
+                        <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                        <%= @book_show.favorites.count %>
+                        <% end %>
+                      </td>
+                    <% else %>
+                      <td>
+                        <%= link_to book_favorites_path(@book_show), method: :book do %>
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        <%= @book_show.favorites.count %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                    <!-- コメント数 -->
+                      <td><%= "#{@book_show.book_comments.count} コメント" %></td>
+
+    <!-- bookcommentここから -->
+            <% @book_show.book_comments.each do |book_comment| %>
+              <tr>
+                <td><%= attachment_image_tag @book_comment.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%><br>
+                  <%= book_comment.user.name %></td>
+                    <td><%= book_comment.comment %></td>
+                <% if book_comment.user == current_user %>
+                  <td><%= link_to "destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                    <% end %>
+                  </td>
+              </tr>
             <% end %>
-            </td>
-            <th><%= @book_show.title %></th>
-            <th><%= @book_show.body %></th>
-            <% if @book_show.user.id == current_user.id %>
-            <th><%= link_to "Edit", edit_book_path(@book_show), class: "btn btn-success" %></th>
-            <th><%= link_to "Destroy",book_path(@book_show), method: :delete, class: "btn btn-danger" %></th>
-        <% end %>
-        </tr>
-        </tbody>
-        </table>
-    </div>
-    </div>
-    </div>
+    <!-- bookcommentここまで -->
+    <!-- コメント投稿フォーム -->
+      <tr>
+        <td><%= form_with(model: [@book_show, @book_comment], remote: true) do |f| %>
+          <%= f.text_area :comment, id: "comment__textarea", class: "col-xs-12",placeholder: "コメントをここに" %>
+          <%= f.submit "送信" %>
+          <% end %>
+
+        </td>
+
+        <div class="comment__table">
+          <%= render 'book_comments/table', book_comments: @book.book_comments %>
+        </div>
+
+      </tr>
+    <!-- コメント投稿フォーム　ここまで -->
+     </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</html>
