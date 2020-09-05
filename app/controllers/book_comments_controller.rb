@@ -4,9 +4,10 @@ class BookCommentsController < ApplicationController
 		@book_comment = current_user.book_comments.new(book_comment_params)
 		@book_comment.book_id = @book.id
 	 if @book_comment.save
-	    redirect_to book_path(@book)
+	    redirect_back(fallback_location: book_path(@book))
 	 else
-		redirect_back(fallback_location: book_path(@book))
+		redirect_to book_path(@book)
+		flash[:notice] = 'Please,enter the comment.'
 	 end
 	end
 

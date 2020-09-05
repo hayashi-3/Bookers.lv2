@@ -53,12 +53,11 @@
                     <!-- コメント数 -->
                       <td><%= "#{@book_show.book_comments.count} コメント" %></td>
 
-            </tr>
     <!-- bookcommentここから -->
             <% @book_show.book_comments.each do |book_comment| %>
               <tr>
-                <td><%= attachment_image_tag @book_comment.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%></td><br>
-                  <td><%= book_comment.user.name %></td>
+                <td><%= attachment_image_tag @book_comment.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%><br>
+                  <%= book_comment.user.name %></td>
                     <td><%= book_comment.comment %></td>
                 <% if book_comment.user == current_user %>
                   <td><%= link_to "destroy", book_book_comments_path(book_comment.book, book_comment), method: :delete, class: "btn btn-danger pull-right" %>
@@ -68,17 +67,7 @@
             <% end %>
     <!-- bookcommentここまで -->
     <!-- コメント投稿フォーム -->
-          <% if @book_comment.errors.any? %>
-            <div>
-                <h2><%= pluralize(book_comment.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-              <ul>
-                <% book_comment.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+    <%=flash[:notice] %>
       <tr>
         <td><%= form_with(model: [@book_show, @book_comment], remote: true) do |f| %>
           <%= f.text_area :comment, id: "comment__textarea", class: "col-xs-12",placeholder: "コメントをここに" %>
