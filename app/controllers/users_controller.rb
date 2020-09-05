@@ -31,6 +31,9 @@ end
     @book = Book.new
     @users = User.all
     @user = User.find(params[:id])
+    book = Book.find(params[:id])
+    @book_comment = BookComment.new
+    @book_comments = BookComment.all
   end
 
   def edit
