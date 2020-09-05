@@ -24,10 +24,10 @@
             <tbody>
             <tr>
                 <td><%= link_to user_path(@book_show.user.id) do %><%= attachment_image_tag @book_show.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
-                    <% end %></td><br>
-                <td><%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %>
-                    <% end %>
+                    <% end %><br>
+                    <%= link_to user_path(@book_show.user.id) do %><%= @book_show.user.name %>
                 </td>
+                <% end %>
                       <td><%= @book_show.title %></td>
                       <td><%= @book_show.body %></td>
                     <% if @book_show.user.id == current_user.id %>
@@ -67,7 +67,6 @@
             <% end %>
     <!-- bookcommentここまで -->
     <!-- コメント投稿フォーム -->
-    <%=flash[:notice] %>
       <tr>
         <td><%= form_with(model: [@book_show, @book_comment], remote: true) do |f| %>
           <%= f.text_area :comment, id: "comment__textarea", class: "col-xs-12",placeholder: "コメントをここに" %>
