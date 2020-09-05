@@ -1,4 +1,6 @@
 class BookCommentsController < ApplicationController
+	before_action :authenticate_user!
+
 	def create
 		@book = Book.find(params[:book_id])
 		@book_comment = current_user.book_comments.new(book_comment_params)
@@ -12,10 +14,10 @@ class BookCommentsController < ApplicationController
 	end
 
 	def destroy
-		@book = Book.find(params[:book_id])
-		@book_comment = current_user.book_comments.find_by(@book)
-		@book_comment.destroy
-	    redirect_back(fallback_location: book_path(@book))
+		book = Book.find(params[:book_id])
+		book_comment = current_user.book_comments.find_by(@book)
+		book_comment.destroy
+	    redirect_back(fallback_location: book_path(book))
 	end
 
 	private
