@@ -1,0 +1,14 @@
+<!-- プロフィールカード -->
+<div class="card" style="width: 25rem;">
+  <h3>User info</h3>
+  <div class="card-body"><%= attachment_image_tag user, :profile_image, fallback: "no_image.jpeg", size: '100x100' %>
+  </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">name
+    <%= user.name %></li>
+    <li class="list-group-item">introduction<%= user.introduction %></li>
+    <li class="list-group-item"><%= "フォロー数: #{@user.followers.count}" %></li>
+    <li class="list-group-item"><%= "フォロワー数: #{@user.followers.count}" %></li>
+  <dev class="row">
+    <%= link_to "", edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  </div>
