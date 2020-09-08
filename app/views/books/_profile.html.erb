@@ -7,8 +7,8 @@
     <li class="list-group-item">name
     <%= user.name %></li>
     <li class="list-group-item">introduction<%= user.introduction %></li>
-    <li class="list-group-item"><%= "フォロー数: #{@user.followers.count}" %></li>
-    <li class="list-group-item"><%= "フォロワー数: #{@user.followers.count}" %></li>
+    <li class="list-group-item"><%= link_to "follows #{@user.followings.count}", following_relationships_path(user) %></li>
+    <li class="list-group-item"><%= link_to "followers #{@user.followers.count}", followers_relationship_path(user) %></li>
   <dev class="row">
     <%= link_to "", edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
   </div>

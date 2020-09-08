@@ -13,6 +13,8 @@ end
     @book = Book.new
     @users = User.all
     @user = current_user
+    @follow_id = @user_id
+    following = current_user.follow(@user)
   end
 
   def new
@@ -33,6 +35,7 @@ end
     @user = User.find(params[:id])
     @book_comment = BookComment.new
     @book_comments = BookComment.all
+    @follow_id = @book.user_id
   end
 
   def edit

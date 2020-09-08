@@ -1,27 +1,29 @@
-<!-- フォロー一覧 -->
+<!-- フォロワー一覧 -->
 <div class="container">
-    <h2>Follow Users</h2>
+    <h2>Follower Users</h2>
+    <% if @users.present? %>
     <table class="table">
             <thead>
             <tr>
-                <th></th>
                 <th>image</th>
                 <th>name</th>
                 <th colspan="3"></th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><% @user.following_user.where.not(id: current_user.id).each do |user| %>
-                <td><%= link_to user_path(@book.user.id) do %><%= attachment_image_tag @book.user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
-                    <% end %><br>
-                    <%= @book.user.name %>
-                </td>
-                <% end %>
-                    <td><%= "フォロー数: #{@user.follower.count}" %></td>
-                    <td><%= "フォロワー数: #{@user.followed.count}" %></td>
-                    <td><%= link_to "Show",user_path(user.id)%></td>
-                </td><% end %>
+                <% @user.followers.where.not(id: current_user.id).each do |user| %>
+                    <tr>
+                      <td><%= attachment_image_tag user, :profile_image , fallback: "no_image.jpeg", size: '40x40'%>
+                          <br>
+                          <%= user.name %>
+                      </td>
+                          <td><%= "フォロー数: #{user.followings.count}" %></td>
+                          <td><%= "フォロワー数: #{user.followers.count}" %></td>
+                          <td><%= link_to "show", user_path(user) %></td>
+                    <% end %>
+                    <% else %>
+                    <td>ユーザーはいません。</td>
+                  <% end %>
             </tr>
         </tbody>
     </table>

@@ -3,16 +3,15 @@ class RelationshipsController < ApplicationController
 	before_action :set_user
 
   	def index
-  		@user = User.find(params[:user_id])
+  		@users = @user.followings.all
   	end
 
   	def show
-  		@user = User.find(params[:user_id])
+  		@users = @user.followers.all
   	end
 
 	def create
-		following = current_user.follow(@user)
-	 if following.save
+	 if current_user.follow(@user)
 	 	redirect_back(fallback_location: root_path)
 	 else
 		redirect_back(fallback_location: root_path)
@@ -20,8 +19,7 @@ class RelationshipsController < ApplicationController
 	end
 
 	def destroy
-		following = current_user.unfollow(@user)
-	 if following.destroy
+	 if current_user.unfollow(@user)
 	 	redirect_back(fallback_location: root_path)
 	 else
 		redirect_back(fallback_location: root_path)
@@ -30,7 +28,7 @@ class RelationshipsController < ApplicationController
 
 	private
 	 def set_user
-	  @user = User.find(params[:follow_id])
+	  @user = User.find(params[:id])
 	 end
 
 end

@@ -3,7 +3,7 @@ before_action :authenticate_user!
 before_action :correct_user, only: [:edit, :update, :destroy]
 
     def correct_user
-    book = Book.find(params[:id])
+         book = Book.find(params[:id])
       if current_user != book.user
         redirect_to books_path
       end
@@ -43,6 +43,8 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     @book_comment = BookComment.new
     @book_comments = BookComment.all
     @favorite = Favorite.new
+    @user = User.find(params[:id])
+    @follow_id = @book.user_id
   end
 
   def edit

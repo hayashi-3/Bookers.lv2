@@ -7,7 +7,9 @@
     <div class="container">
     <div class="row">
       <div class="col-xs-3">
-      <%= render 'books/book',book: @book,user: @book_show.user %>
+        <%= render 'books/profile',user: @book_show.user %>
+        <%= render 'relationships/follow_button',user: @user %>
+        <%= render 'books/post',book: @book %>
         </div>
         <div class="top"></div>
         <div class="col-xs-9">

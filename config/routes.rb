@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 	resources :about
 	end
   resources :users
-  resources :relationships, only: [:create, :destroy]
+  get '/users/:id/relationships' => 'relationships#index',as: 'following_relationships'
+  get '/users/:id/relationship' => 'relationships#show',as: 'followers_relationship'
+  post '/relationships/:id' => 'relationships#create', as: 'relationships'
+  delete '/relationships/:id' => 'relationships#destroy', as: 'relationship'
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :book_comments,only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
