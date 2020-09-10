@@ -42,6 +42,19 @@
   </div>
 </header>
 <% end %>
+<!-- 検索フォーム -->
+<% if user_signed_in? %>
+  <div class="search-form">
+    <%= form_tag(search_path,:method => 'get') do %>
+    <%= select_tag 'range' ,options_for_select([['---選択してください---', ''], ['User', '1'], ['Book', '2']]) %>
+
+    <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+    <%= text_field_tag (:word) %>
+    <%= submit_tag "検索" %>
+  </div>
+<% end %>
+<!-- 検索フォームここまで -->
+<% end %>
 <%= yield %>
 <footer>
   <div class="container">
